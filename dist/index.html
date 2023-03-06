@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="./bundle.js" defer></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
+    <title>Login</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"><img src="img/logo.jpg" alt="Logo" class="rounded-circle" height="default"></a>
+
+            <!-- Toggle button -->
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link" href="#"><strong>Home</strong></a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-black px-3 me-2" data-mdb-toggle="modal" data-mdb-target="#loginModal">
+                    Login
+                    </button>
+                    <button type="button" class="btn btn-warning me-3" data-mdb-toggle="modal" data-mdb-target="#signupModal">
+                    Sign up
+                    </button>
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+<!-- Login Modal -->
+<div class="modal top fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog   modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" class="fw-bold mb-2 text-uppercase" id="exampleModalLabel"><strong>Login</strong></h2>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-md-5 mt-md-4 pb-2">
+                    <p class="text-dark-50 mb-5 text-center">Please enter your username and password!</p>
+                    <div class="form-outline form-black mb-4">
+                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typeEmailX">Username</label>
+                    </div>
+                    <div class="form-outline form-black mb-4">
+                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typePasswordX">Password</label>
+                    </div>
+                    <div class="text-center">
+                    <p class="mb-0">Don't have an account? 
+                    <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#signupModal">Signup</a>
+                    </p>
+                    </div>
+                </div>
+            </div>    
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                    Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Login</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- Login Modal End -->
+
+<!-- Signup Modal -->
+<div class="modal top fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog   modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" class="fw-bold mb-2 text-uppercase" id="exampleModalLabel"><strong>Register New Account</strong></h2>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-md-5 mt-md-4 pb-2">
+                    <p class="text-dark-50 mb-5 text-center">Please enter your account details!</p>
+                    <div class="form-outline form-black mb-4">
+                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typeEmailX">First Name</label>
+                    </div>
+                    <div class="form-outline form-black mb-4">
+                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typeEmailX">Last Name</label>
+                    </div>
+                    <div class="form-outline form-black mb-4">
+                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typeEmailX">Username</label>
+                    </div>
+                    <div class="form-outline form-black mb-4">
+                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                        <label class="form-label" for="typePasswordX">Password</label>
+                    </div>
+                    <p class="mb-0">Already have an account? <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a></p>
+                </div>
+            </div>    
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                    Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Login</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- Signup Modal End -->
+
+    <img src="./img/background.jpg" alt="Background Photo" width="1520" height="700">
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+</body>
+</html>
