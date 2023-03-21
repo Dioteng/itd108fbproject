@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
-    <title>Sales Management System</title>
+    <title>AzisJ's App</title>
 </head>
 <body>
     <!-- Navbar -->
@@ -40,7 +40,7 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><strong>Home</strong></a>
+                    <a class="nav-link" href="index.html" id="logout" style="display: none;"><strong>Logout</strong></a>
                     </li>
                 </ul>
                 <!-- Left links -->
@@ -61,36 +61,40 @@
 
 <!-- Login Modal -->
 <div class="modal top fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-    <div class="modal-dialog   modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" class="fw-bold mb-2 text-uppercase" id="exampleModalLabel"><strong>Login</strong></h2>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div class="mb-md-5 mt-md-4 pb-2">
                     <p class="text-dark-50 mb-5 text-center">Please enter your username and password!</p>
+                    <form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data">
                     <div class="form-outline form-black mb-4">
-                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeEmailX">Username</label>
+                        <input type="email" id="loginEmail" class="form-control form-control-lg" />
+                        <label class="form-label" for="email">Email</label>
                     </div>
                     <div class="form-outline form-black mb-4">
-                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typePasswordX">Password</label>
+                        <input type="password" id="loginPassword" class="form-control form-control-lg" />
+                        <label class="form-label" for="password">Password</label>
                     </div>
-                    <div class="text-center">
-                    <p class="mb-0">Don't have an account? 
-                    <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#signupModal">Signup</a>
-                    </p>
-                    </div>
+                    <button type="button" id="login" name="login" class="btn btn-warning ">Login</button>
+                    </form>
+                    <br>
+                    <p class="fw-bold mx-3 mb-0 text-muted">OR</p>
+                    <br>
+                    <button type="button" id="googleLogin" name="googleLogin" class="btn btn-primary" style="background-color: #0F9D58"><i class="fab fa-google "></i> Sign in with Google</button>
+                    <button type="button" id="facebookLogin" name="facebookLogin" class="btn btn-primary" style="background-color: #3b5998"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
                 </div>
             </div>    
             <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                    Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Login</button>
+                <div class="text-center">
+                    <p class="mb-0">Don't have an account? 
+                    <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#signupModal">Signup</a>
+                    </p>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -104,42 +108,187 @@
                 <h2 class="modal-title" class="fw-bold mb-2 text-uppercase" id="exampleModalLabel"><strong>Register New Account</strong></h2>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div class="mb-md-5 mt-md-4 pb-2">
                     <p class="text-dark-50 mb-5 text-center">Please enter your account details!</p>
+                    <form name="registration_form" id="registration_form" method="post" action="#" enctype="multipart/form-data" >
                     <div class="form-outline form-black mb-4">
-                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeEmailX">First Name</label>
+                        <input type="email" id="newEmail" class="form-control form-control-lg" />
+                        <label class="form-label" for="email">Email</label>
                     </div>
                     <div class="form-outline form-black mb-4">
-                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeEmailX">Last Name</label>
+                        <input type="password" id="newPassword" class="form-control form-control-lg" />
+                        <label class="form-label" for="password">Password</label>
                     </div>
-                    <div class="form-outline form-black mb-4">
-                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeEmailX">Username</label>
-                    </div>
-                    <div class="form-outline form-black mb-4">
-                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typePasswordX">Password</label>
-                    </div>
-                    <p class="mb-0">Already have an account? <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a></p>
+                    <button type="button" id="register" name="register" class="btn btn-warning">Signup</button>
+                    </form>
+                    <br>
+                    <p class="fw-bold mx-3 mb-0 text-muted">OR</p>
+                    <br>
+                    <button type="button" id="googleLogin" name="googleLogin" class="btn btn-primary" style="background-color: #0F9D58"><i class="fab fa-google "></i> Sign in with Google</button>
+                    <button type="button" id="facebookLogin" name="facebookLogin" class="btn btn-primary" style="background-color: #3b5998"><i class="fab fa-facebook-f"></i> Sign in with Facebook</button>
                 </div>
             </div>    
             <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                    Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Login</button>
+                    <p class="mb-0">Already have an account? <a class="text-link-50 fw-bold" data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a></p>
                 </div>
         </div>
     </div>
 </div>
 <!-- Signup Modal End -->
 
-    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpapercave.com%2Fonline-shopping-wallpapers&psig=AOvVaw1sVnej0OqIkXCQVfKHLIvo&ust=1678205789312000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMi5uvDZx_0CFQAAAAAdAAAAABAD" alt="Background Photo" width="1520" height="700">
+    <img src="#" alt="Background Photo" width="1520" height="700">
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
 </body>
 </html>
+
+<script type="module">
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signOut, 
+    GoogleAuthProvider, 
+    FacebookAuthProvider,  
+    signInWithRedirect, 
+    getRedirectResult } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDWFlcUirDy_M6S_U9WNITNKtTOJfBFgTE",
+  authDomain: "fir-itd108.firebaseapp.com",
+  projectId: "fir-itd108",
+  storageBucket: "fir-itd108.appspot.com",
+  messagingSenderId: "362658377321",
+  appId: "1:362658377321:web:2c667a90ba18c5fe7d3cf8",
+  measurementId: "G-6LCYHW6ZFH"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+const gProvider = new GoogleAuthProvider();
+const fProvider = new FacebookAuthProvider();
+console.log(app)
+
+//----- New Registration code start	  
+document.getElementById("register").addEventListener("click", function() {
+  var email =  document.getElementById("newEmail").value;
+  var password = document.getElementById("newPassword").value;
+  
+  //For new registration
+  createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert("Registration successfully!!");
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    console.log(errorMessage);
+    alert(error);
+  });		  		  
+});
+//----- End
+
+//----- Login code start	  
+document.getElementById("login").addEventListener("click", function() {
+  var email =  document.getElementById("loginEmail").value;
+  var password = document.getElementById("loginPassword").value;
+
+  signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert(user.email+" Login successfully!!!");
+    document.getElementById('logout').style.display = 'block';
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    alert(errorMessage);
+  });		  		  
+});
+//----- End
+
+//----- Logout code start	  
+document.getElementById("logout").addEventListener("click", function() {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log('Sign-out successful.');
+    alert('Sign-out successful.');
+    document.getElementById('logout').style.display = 'none';
+  }).catch((error) => {
+    // An error happened.
+    console.log('An error happened.');
+  });		  		  
+});
+//----- End
+
+// Google OAuth
+googleLogin.addEventListener('click', (e) => {
+    signInWithRedirect(auth, gProvider);
+
+    getRedirectResult(auth)
+        .then((result) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        document.getElementById('logout').style.display = 'block';
+        }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+  });
+
+})
+
+// Facebook OAuth
+facebookLogin.addEventListener('click', (e) => {
+    signInWithRedirect(auth, fProvider);
+
+    getRedirectResult(auth)
+        .then((result) => {
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error);
+        // ...
+    });
+
+})
+</script>
