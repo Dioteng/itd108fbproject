@@ -40,7 +40,6 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <a class="nav-link" href="index.html" id="logout" style="display: none;"><strong>Logout</strong></a>
                     </li>
                 </ul>
                 <!-- Left links -->
@@ -176,8 +175,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
-const gProvider = new GoogleAuthProvider();
-const fProvider = new FacebookAuthProvider();
+const provider = new GoogleAuthProvider(app);
+const fbProvider = new FacebookAuthProvider(app);
 console.log(app)
 
 //----- New Registration code start	  
@@ -213,8 +212,8 @@ document.getElementById("login").addEventListener("click", function() {
     const user = userCredential.user;
     console.log(user);
     alert(user.email+" Login successfully!!!");
-    document.getElementById('logout').style.display = 'block';
-    // ...
+    // redirect to index.html
+    window.location.href = "./main.html";
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -225,23 +224,9 @@ document.getElementById("login").addEventListener("click", function() {
 });
 //----- End
 
-//----- Logout code start	  
-document.getElementById("logout").addEventListener("click", function() {
-  signOut(auth).then(() => {
-    // Sign-out successful.
-    console.log('Sign-out successful.');
-    alert('Sign-out successful.');
-    document.getElementById('logout').style.display = 'none';
-  }).catch((error) => {
-    // An error happened.
-    console.log('An error happened.');
-  });		  		  
-});
-//----- End
-
 // Google OAuth
-googleLogin.addEventListener('click', (e) => {
-    signInWithRedirect(auth, gProvider);
+document.getElementById("googleLogin").addEventListener("click", function() {
+    signInWithRedirect(auth, provider);
 
     getRedirectResult(auth)
         .then((result) => {
@@ -252,7 +237,9 @@ googleLogin.addEventListener('click', (e) => {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
-        document.getElementById('logout').style.display = 'block';
+        alert(user.email+" Login successfully!!!");
+        // redirect to index.html
+         window.location.href = "./main.html";
         }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -261,14 +248,13 @@ googleLogin.addEventListener('click', (e) => {
         const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
   });
 
 })
 
 // Facebook OAuth
-facebookLogin.addEventListener('click', (e) => {
-    signInWithRedirect(auth, fProvider);
+document.getElementById("facebookLogin").addEventListener("click", function() {
+    signInWithRedirect(auth, fbProvider);
 
     getRedirectResult(auth)
         .then((result) => {
@@ -277,8 +263,10 @@ facebookLogin.addEventListener('click', (e) => {
         const token = credential.accessToken;
 
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
+        console.log(user);
+        alert(user.email+" Login successfully!!!");
+        // redirect to index.html
+        window.location.href = "./main.html";
         }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;

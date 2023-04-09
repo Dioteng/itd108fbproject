@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="./bundle.js" defer></script>
+    <title>Home</title>
+</head>
+<body>
+  
+    <button id="logout" class="">Logout</button>
+    <button id="save">Save</button>
+    <button id="retrieve">Get Data</button>
+    <button id="update">Update</button>
+    <button id="delete">Delete</button>
+</body>
+</html>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, getDocs, setDoc, doc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDWFlcUirDy_M6S_U9WNITNKtTOJfBFgTE",
+  authDomain: "fir-itd108.firebaseapp.com",
+  projectId: "fir-itd108",
+  storageBucket: "fir-itd108.appspot.com",
+  messagingSenderId: "362658377321",
+  appId: "1:362658377321:web:2c667a90ba18c5fe7d3cf8",
+  measurementId: "G-6LCYHW6ZFH"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+console.log(app)
+const db = getFirestore(app);
+
+//----- Logout code start	  
+document.getElementById("logout").addEventListener("click", function() {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log('Sign-out successful.');
+    alert('Sign-out successful.');
+    window.location.href = "./index.html"; 
+  }).catch((error) => {
+    // An error happened.
+    console.log('An error happened.');
+  });		  		  
+});
+//----- End
+
+// Firestore - create data
+document.getElementById("save").addEventListener("click", async () => {
+  const harbCollectionRef = collection(db, "harbinger")
+  try {
+    const newHarbRef = await addDoc(harbCollectionRef, {
+      name: "Tartaglia",
+      code: "Eleventh",
+      vision: "hydro",
+      delusion: "electro"      
+    })
+    console.log('Created a new collection: ${newHarbRef.id}')
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// get data
+document.getElementById("retrieve").addEventListener("click", async () => {
+  const q = query(collection(db, "harbinger"))
+  const harbinger = await getDocs(q)
+  harbinger.forEach((harbinger) => {
+    console.log(harbinger.data())
+  })
+})
+
+// modify data
+document.getElementById("update").addEventListener("click", async () => {
+  const q = query(collection(db, "harbinger"))
+  const harbinger = await getDocs(q)
+  if(harbinger.empty){
+    console.log("No data to change yet!")
+    return
+  }
+
+  await setDoc(doc(db, "harbinger", harbinger.docs[1].id), {
+    name: "Balladeer",
+    code: "Sixth",
+    vision: "anemo",
+    delusion: "dendro"
+  })
+})
+
+// delete data
+document.getElementById("delete").addEventListener("click", async () => {
+  const q = query(collection(db, "harbinger"))
+  const harbinger = await getDocs(q)
+  if(harbinger.empty){
+    console.log("No data to change yet!")
+    return
+  }
+  
+  await deleteDoc(doc(db, "harbinger", harbinger.docs[harbinger.docs.length - 1].id))
+  console.log("Deleted successfully!")
+})
+
+// for real-time updates
+const q = query(collection(db, "harbinger"))
+
+const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  console.log("------------------------------------------------------------")
+  querySnapshot.forEach((harbinger) => {
+    console.log(harbinger.data())
+  }) 
+})
+
+unsubscirbe()
+</script>
