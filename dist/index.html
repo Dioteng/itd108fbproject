@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="./bundle.js" defer></script>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
-    <title>AzisJ's App</title>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      
+        <script src="./bundle.js" defer></script>
+        <title>Login</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+      
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
+        
+        <!-- Favicons -->
+        <link href="assets/img/game-console.png" rel="icon">
+      
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      
+        <!-- Vendor CSS Files -->
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+      
+        <!-- Template Main CSS File -->
+        <link href="assets/css/style.css" rel="stylesheet">
+      
+        <!-- =======================================================
+        * Template Name: Tempo
+        * Updated: Mar 10 2023 with Bootstrap v5.2.3
+        * Template URL: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/
+        * Author: BootstrapMade.com
+        * License: https://bootstrapmade.com/license/
+        ======================================================== -->
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Container wrapper -->
-        <div class="container">
-            <!-- Navbar brand -->
-            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"><img src="img/logo.jpg" alt="Logo" class="rounded-circle" height="default"></a>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
 
-            <!-- Toggle button -->
-            <button
-            class="navbar-toggler"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarButtonsExample"
-            aria-controls="navbarButtonsExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            >
-            <i class="fas fa-bars"></i>
-            </button>
-            
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    </li>
-                </ul>
-                <!-- Left links -->
-                <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-black px-3 me-2" data-mdb-toggle="modal" data-mdb-target="#loginModal">
-                    Login
-                    </button>
-                    <button type="button" class="btn btn-warning me-3" data-mdb-toggle="modal" data-mdb-target="#signupModal">
-                    Sign up
-                    </button>
-                </div>
-            </div>
-            <!-- Collapsible wrapper -->
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
+      <h1 class="logo"><a href="index.html">VideoGame.is</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>       -->
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <!-- <h3><strong>Welcome!</strong></h3> -->
+      <h1>Welcome!</h1>
+      <!-- <h2>Wanna know who has the biggest sales today?</h2> -->
+      <a class="btn-get-started scrollto" data-mdb-toggle="modal" data-mdb-target="#loginModal">Get Started</a>
+    </div>
+  </section><!-- End Hero -->
 
 <!-- Login Modal -->
 <div class="modal top fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
@@ -136,10 +142,9 @@
 </div>
 <!-- Signup Modal End -->
 
-    <img src="#" alt="Background Photo" width="1520" height="700">
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
 
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
 </body>
 </html>
 
@@ -249,8 +254,7 @@ document.getElementById("googleLogin").addEventListener("click", function() {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
   });
-
-})
+});
 
 // Facebook OAuth
 document.getElementById("facebookLogin").addEventListener("click", function() {
@@ -277,6 +281,5 @@ document.getElementById("facebookLogin").addEventListener("click", function() {
         const credential = FacebookAuthProvider.credentialFromError(error);
         // ...
     });
-
-})
+});
 </script>
