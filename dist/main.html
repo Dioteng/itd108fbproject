@@ -9,7 +9,17 @@
   <title>VideoGame.is - Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css"/>
+    
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
+  <!-- DataTables JS -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>  
+
   <!-- Favicons -->
   <link href="assets/img/game-console.png" rel="icon">
 
@@ -24,11 +34,11 @@
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+  <!-- <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet"> -->
+  
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Mar 09 2023 with Bootstrap v5.2.3
@@ -52,12 +62,6 @@
   
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-  
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
   
         <li class="nav-item dropdown pe-3">
   
@@ -142,52 +146,19 @@
 
               </div>
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table id="myTable" class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Year of Release</th>
-                    <th scope="col">Publisher</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Global Sales</th>
+                    <th>Name</th>
+                    <th>Year of Release</th>
+                    <th>Publisher</th>
+                    <th>Genre</th>
+                    <th>Global Sales (%)</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody id="tbody">
-                  <tr>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                    <td>2016-05-25</td>
-                  </tr>
+
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -200,7 +171,7 @@
     </section>
 
     <!-- AddData Modal -->
-    <div class="modal fade" id="addData-modal" tabindex="-1">
+    <div class="modal fade" id="addData-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -262,6 +233,69 @@
       </div>
     </div><!-- End AddData Modal-->
 
+    <!-- EditData Modal -->
+    <div class="modal fade" id="editData-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><strong>Update Data</strong></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form -->
+            <form class="row g-3" id="editData">
+              <div class="col-md-12">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="editInputName" placeholder="Video Game Name">
+                  <label for="editInputName">Video Game Name</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="editInputPublisher" placeholder="Publisher">
+                  <label for="editInputPublisher">Publisher</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="editInputYear" name="year" min="1000" max="9999" placeholder="Year">
+                  <label for="editInputYear">Year Release</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="editInputGenre" aria-label="Genre">
+                    <option selected>Sports</option>
+                    <option>Platform</option>
+                    <option>Racing</option>
+                    <option>Role-Playing</option>
+                    <option>Puzzle</option>
+                    <option>Misc</option>
+                    <option>Shooter</option>
+                    <option>Simulation</option>
+                    <option>Action</option>
+                  </select>
+                  <label for="editInputGenre">Genre</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="editInputSales" name="sales" min="0" placeholder="Sales">
+                    <label for="editInputSales">Sales (in %)</label>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+              </div>
+            </form><!-- End floating Labels Form -->
+          </div>
+        </div>
+      </div>
+    </div><!-- End EditData Modal-->
+
   </main>  
 
   <!-- Vendor JS Files -->
@@ -270,82 +304,215 @@
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
   <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <!-- <script src="assets/vendor/simple-datatables/simple-datatables.js"></script> -->
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, getDocs, getDoc, setDoc, doc, deleteDoc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWFlcUirDy_M6S_U9WNITNKtTOJfBFgTE",
+      authDomain: "fir-itd108.firebaseapp.com",
+      projectId: "fir-itd108",
+      storageBucket: "fir-itd108.appspot.com",
+      messagingSenderId: "362658377321",
+      appId: "1:362658377321:web:2c667a90ba18c5fe7d3cf8",
+      measurementId: "G-6LCYHW6ZFH"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    console.log(app)
+    const db = getFirestore(app);
+    
+    //----- Logout code start	  
+    document.getElementById("logout").addEventListener("click", function() {
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log('Sign-out successful.');
+        alert('Sign-out successful.');
+        window.location.href = "./index.html"; 
+      }).catch((error) => {
+        // An error happened.
+        console.log('An error happened.');
+      });		  		  
+    });//----- End
+    
+    //----- Read data
+    const vgames = collection(db, "videogames");
+
+    const tbody = document.getElementById("tbody");
+    let dataTableInitialized = false;
+
+    function initializeDataTable() {
+      if (!dataTableInitialized) {
+        $('#myTable').DataTable({
+          order: [[4, "desc"]]
+        });
+        dataTableInitialized = true;
+      }
+    }
+    
+    onSnapshot(vgames, (querySnapshot) => {
+      let tableRows = "";
+
+      querySnapshot.forEach((queryDoc) => {
+        tableRows += `
+          <tr>
+            <td>${queryDoc.data().name}</td>
+            <td>${queryDoc.data().year}</td>
+            <td>${queryDoc.data().publisher}</td>
+            <td>${queryDoc.data().genre}</td>
+            <td>${queryDoc.data().sales}</td>
+            <td>
+              <button type="button" class="btn btn-warning btn-sm edit" data-id="${queryDoc.id}"><i class="ri-edit-2-fill"></i></button>
+              <button type="button" class="btn btn-danger btn-sm delete" data-id="${queryDoc.id}"><i class="ri-delete-bin-6-fill"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = tableRows;
+      
+      initializeDataTable();
+      addDeleteListeners(); // Add event listeners to delete buttons
+      addEditListeners(); // Add event listeners to edit buttons
+    });    
+    
+    //----- Create Data    
+    const addDataForm = document.getElementById("addData");
+    
+    addDataForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+    
+      var name = document.getElementById("inputName").value;
+      var publisher = document.getElementById("inputPublisher").value;
+      var year = document.getElementById("inputYear").value;
+      var genre = document.getElementById("inputGenre").value;
+      var sales = document.getElementById("inputSales").value;
+    
+      const videogameRef = collection(db, "videogames")
+      try {
+        const newVGRef = addDoc(videogameRef, {
+          name: name,
+          publisher: publisher,
+          year: year,
+          genre: genre,
+          sales: sales
+        })
+        console.log("Document written with ID: ", newVGRef.id);
+        setTimeout(() => {
+          document.location.reload();
+        }, 1000);
+      } catch (error) {
+        console.log(error)
+      }
+    });//------ End
+
+    //----- Delete data
+    async function deleteData(docId) {
+      try {
+        await deleteDoc(doc(db, "videogames", docId));
+        alert("Document successfully deleted!")
+        setTimeout(() => {
+          document.location.reload();
+        }, 500);
+      } catch (error) {
+        console.error("Error deleting document: ", error);
+      }
+    }
+
+    function addDeleteListeners() {
+      const deleteButtons = document.querySelectorAll(".delete");
+
+      deleteButtons.forEach((button) =>
+        button.addEventListener("click", (event) => {
+          const docId = event.target.closest("button").dataset.id;
+          deleteData(docId);
+        })
+      );
+    };//------ End
+
+    //----- Edit data
+    function addEditListeners() {
+      const editButtons = document.querySelectorAll(".edit");
+
+      editButtons.forEach((button) =>
+        button.addEventListener("click", (event) => {
+          const docId = event.target.closest("button").dataset.id;
+          showEditModal(docId);
+        })
+      );
+    }
+
+    async function showEditModal(docId) {
+      try {
+        const docRef = doc(db, "videogames", docId);
+        const docSnapshot = await getDoc(docRef);
+        const data = docSnapshot.data();
+
+        // Populate the input fields with the current data
+        document.getElementById("editInputName").value = data.name;
+        document.getElementById("editInputPublisher").value = data.publisher;
+        document.getElementById("editInputYear").value = data.year;
+        document.getElementById("editInputGenre").value = data.genre;
+        document.getElementById("editInputSales").value = data.sales;
+
+        // Store the document ID in a hidden input field
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.id = "editDocId";
+        hiddenInput.value = docId;
+        document.getElementById("editData").appendChild(hiddenInput);
+
+        // Show the edit modal
+        const editDataModal = new bootstrap.Modal(document.getElementById("editData-modal"));
+        editDataModal.show();
+      } catch (error) {
+        console.error("Error getting document: ", error);
+      }
+    }
+
+    async function updateData(docId, updatedData) {
+      try {
+        const docRef = doc(db, "videogames", docId);
+        await updateDoc(docRef, updatedData);
+        console.log("Document successfully updated!");
+        setTimeout(() => {
+          document.location.reload();
+        }, 500);
+      } catch (error) {
+        console.error("Error updating document: ", error);
+      }
+    }
+
+    document.getElementById("saveChanges").addEventListener("click", async () => {
+      const docId = document.getElementById("editDocId").value;
+
+      const updatedData = {
+        name: document.getElementById("editInputName").value,
+        publisher: document.getElementById("editInputPublisher").value,
+        year: document.getElementById("editInputYear").value,
+        genre: document.getElementById("editInputGenre").value,
+        sales: document.getElementById("editInputSales").value,
+      };
+      await updateData(docId, updatedData);
+    });//----- End
+
+  </script>
 </body>
 </html>
-
-<script type="module">
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, getDocs, setDoc, doc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDWFlcUirDy_M6S_U9WNITNKtTOJfBFgTE",
-  authDomain: "fir-itd108.firebaseapp.com",
-  projectId: "fir-itd108",
-  storageBucket: "fir-itd108.appspot.com",
-  messagingSenderId: "362658377321",
-  appId: "1:362658377321:web:2c667a90ba18c5fe7d3cf8",
-  measurementId: "G-6LCYHW6ZFH"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth();
-console.log(app)
-const db = getFirestore(app);
-
-//----- Logout code start	  
-document.getElementById("logout").addEventListener("click", function() {
-  signOut(auth).then(() => {
-    // Sign-out successful.
-    console.log('Sign-out successful.');
-    alert('Sign-out successful.');
-    window.location.href = "./index.html"; 
-  }).catch((error) => {
-    // An error happened.
-    console.log('An error happened.');
-  });		  		  
-});//----- End
-
-//----- Create Data
-const addDataForm = document.getElementById("addData");
-
-addDataForm.addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  var name = document.getElementById("inputName").value;
-  var publisher = document.getElementById("inputPublisher").value;
-  var year = document.getElementById("inputYear").value;
-  var genre = document.getElementById("inputGenre").value;
-  var sales = document.getElementById("inputSales").value;
-
-  const videogameRef = collection(db, "videogames")
-  try {
-    const newVGRef = addDoc(videogameRef, {
-      name: name,
-      publisher: publisher,
-      year: year,
-      genre: genre,
-      sales: sales
-    })
-    console.log('Created a new collection: ', newVGRef.id);
-    alert("Data Successfully added!")
-  } catch (error) {
-    console.log(error)
-  }
-});//------ End
-
-</script>
